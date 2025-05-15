@@ -1,0 +1,14 @@
+FROM jenkins/jenkins:lts
+
+USER root
+
+# Install Docker and set up group permissions
+RUN apt-get update && \
+    apt-get install -y docker.io && \
+    groupadd -g 999 docker || true && \
+    usermod -aG docker jenkins
+
+USER jenkins
+
+# Run Jenkins with bash to load group memberships but preserve original CMD
+CMD ["bash", "-c", "/usr/local/bin/jenkins.sh"]
