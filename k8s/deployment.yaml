@@ -24,9 +24,8 @@ metadata:
   name: ci-cd-service
 spec:
   type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 5000
   selector:
     app: ci-cd-demo
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 5000
